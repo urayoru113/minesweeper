@@ -1,0 +1,46 @@
+.btn {
+    border: 1px solid #000;
+    width: 30px;
+    height: 30px;
+    margin: 1px;
+    background-color:rgba(0, 0, 0, 0.05);
+}
+.btn:hover {
+    background-color: grey;
+}
+.clicked0 {
+    background-color: grey;
+}
+.clicked1 {
+    background-color: grey;
+    color: blue;
+}
+.clicked2 {
+    background-color: grey;
+    color: green;
+}
+.clicked3 {
+    background-color: grey;
+    color: red;
+}
+.clicked4 {
+    background-color: grey;
+    color: darkSlateBlue ;
+}
+.clicked5 {
+    background-color: grey;
+    color: crimson;
+}
+.clicked6 {
+    background-color: grey;
+    color: cyan ;
+}
+.clicked7 {
+    background-color: grey;
+    color: darkGreen ;
+}
+.clicked8 {
+    background-color: grey;
+    color: dimGrey;
+}
+

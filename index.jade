@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title minesweeper
+        link(href='game.css', rel='stylesheet')
+        script(src="game.js")
+    body
+        center
+            h1 Minesweeper
+            button(onclick='start()') 開始
+            span
+                |     row:
+                input#row(maxlength=3, size=3)
+                |     col:
+                input#col(maxlength=3, size=3)
+                |     bomb:
+                input#bomb(maxlength=3, size=3)
+            #table

@@ -15,5 +15,3 @@ See minesweeper [wiki page](https://en.wikipedia.org/wiki/Minesweeper_(video_gam
 ## License
 
 BSD license.
-
-All rights reserved.

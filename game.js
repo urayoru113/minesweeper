@@ -12,8 +12,8 @@ class Minesweeper {
         
         this.init()
     }
-    
-    
+
+
     init() {
         this.createBox();
         this.showBox();
@@ -106,48 +106,38 @@ class Minesweeper {
             this.clicked++;
         }
         
+        let spreadX;
+        let spreadY;
+        let spread = [
+            [-1, -1], [0, -1], [1, -1],
+            [-1,  0],          [1,  0],
+            [-1,  1], [0,  1], [1,  1],
+        ];
         for (let i = 0; i < this.x; i++) {
             for (let j = 0; j < this.y; j++) {
-                if (this.box[i][j].isMine) {
-                    if (i != 0) {
-                        this.box[i - 1][j].mineSum += 1;
-                        if (j != 0) {
-                            this.box[i - 1][j - 1].mineSum += 1;
-                        }
-                        if (j != this.y - 1) {
-                            this.box[i - 1][j + 1].mineSum += 1;
-                        }
-                    }
-                    if (i != this.x - 1) {
-                        this.box[i + 1][j].mineSum += 1;
-                        if (j != 0) {
-                            this.box[i + 1][j - 1].mineSum += 1;
-                        }
-                        if (j != this.y - 1) {
-                            this.box[i + 1][j + 1].mineSum += 1;
-                        }
-                    }
-                    if (j != 0) {
-                        this.box[i][j - 1].mineSum += 1;
-                    }
-                    if (j != this.y - 1) {
-                        this.box[i][j + 1].mineSum += 1;
+                for (let k = 0; k < spread.length; k++) {
+                    spreadX = i + spread[k][0];
+                    spreadY = j + spread[k][1];
+                    if (this.box[i][j].isMine &&
+                        spreadX >= 0 && spreadX < this.x &&
+                        spreadY >= 0 && spreadY < this.y) {
+                        this.box[spreadX][spreadY].mineSum += 1;
                     }
                 }
             }
         }
-        
+
         for (let i = 0; i < this.x; i++) {
             for (let j = 0; j < this.y; j++) {
                 if (this.box[i][j].isMine) {
-                    this.box[i][j].mineSum = -1;
+                    this.box[i][j].mineSum = 9;
                 }
             }
         }
     }
     
     showNumber(x, y) {
-        if (this.box[x][y].isClick === true || this.box[x][y].innerHTML === "x") {
+        if (this.box[x][y].isClick|| this.box[x][y].innerHTML === "x") {
             return;
         }
         this.clicked++;
@@ -157,32 +147,21 @@ class Minesweeper {
             this.box[x][y].innerHTML = this.box[x][y].mineSum;
             return;
         }
-        if (x != 0) {
-            this.showNumber(x - 1, y);
-            if (y != 0) {
-                this.showNumber(x - 1, y - 1);
+        let spread = [
+            [-1, -1], [0, -1], [1, -1],
+            [-1,  0],          [1,  0],
+            [-1,  1], [0,  1], [1,  1],
+        ];
+        let spreadX;
+        let spreadY;
+        for (let i = 0; i < spread.length; i++) {
+            spreadX = x + spread[i][0];
+            spreadY = y + spread[i][1];
+            if (spreadX >= 0 && spreadX < this.x && spreadY >= 0 && spreadY < this.y) {
+                this.showNumber(spreadX, spreadY);
             }
-            if (y != this.y - 1) {
-                this.showNumber(x - 1, y + 1);
-            }
-        }
-        if (x != this.x - 1) {
-            this.showNumber(x + 1, y);
-            if (y != 0) {
-                this.showNumber(x + 1, y - 1);
-            }
-            if (y != this.y - 1) {
-                this.showNumber(x + 1, y + 1);
-            }
-        }
-        if (y != 0) {
-            this.showNumber(x, y - 1);
-        }
-        if (y != this.y - 1) {
-            this.showNumber(x, y + 1);
         }
     }
-    
 }
 
 const start = function gameStart() {
